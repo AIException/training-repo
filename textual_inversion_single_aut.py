@@ -476,7 +476,7 @@ def main():
 
     input_folders = ['training_data']
     place_holders = [train_info['placeholder']]
-    output_folders = [input_folders[0]+'/results{}'.format(place_holders[0])]
+    output_folders = ['/home/f_mattera_it/training-repo/training_data/results{}'.format(place_holders[0])]
     init_toks = [train_info['init_tok']]
 
 
