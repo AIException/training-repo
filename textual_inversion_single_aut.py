@@ -44,7 +44,7 @@ from diffusers import (
     UNet2DConditionModel,
 )
 from diffusers.optimization import get_scheduler
-from diffusers.utils import check_min_version, is_wandb_available
+from diffusers.utils import check_min_version#, is_wandb_available
 from diffusers.utils.import_utils import is_xformers_available
 from huggingface_hub import HfFolder, Repository, create_repo, whoami
 
@@ -469,12 +469,14 @@ def main():
 # PLACEHOLDER TOKEN
 # INITIALIZER TOKEN
     
-    train_info = json.load('json_data.json')
+    with open('json_data.json', 'r') as j:
+      train_info = json.loads(j.read())
+
     args = parse_args()
 
     input_folders = ['training_data']
     place_holders = [train_info['placeholder']]
-    output_folders = [input_folders+'/results{}'.format(place_holders[0])]
+    output_folders = [input_folders[0]+'/results{}'.format(place_holders[0])]
     init_toks = [train_info['init_tok']]
 
 
@@ -495,10 +497,10 @@ def main():
             logging_dir=logging_dir,
         )
 
-        if args.report_to == "wandb":
+        """if args.report_to == "wandb":
             if not is_wandb_available():
                 raise ImportError("Make sure to install wandb if you want to use it for logging during training.")
-            import wandb
+            import wandb"""
 
         # Make one log on every process with the configuration for debugging.
         logging.basicConfig(
