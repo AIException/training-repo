@@ -60,7 +60,7 @@ showcase = st.container()
 
 with header:
     st.title('NeoLocus Training')
-    st.write('An OpenAI powered tool that helps users generate interior designs effortlessly.') 
+    st.write('A generative AI powered tool that helps Companies place their products in Custom Environments.') 
     st.write('Train your items here!')
 
     train_pics = st.file_uploader('Upload pictures of your item', accept_multiple_files = True)
@@ -73,7 +73,7 @@ with header:
     if pictures:
         for train_pic in train_pics:
             print(type(train_pic))
-            print(train_pic)
+            #print(train_pic)
             result_upload = send_train_pic(train_pics)
             st.write(result_upload)
         pictures = False

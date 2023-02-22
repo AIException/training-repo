@@ -4,13 +4,15 @@ import os
 import accelerate
 import base64
 from flask import Flask, jsonify, request
+import glob
+
+
 
 
 app = Flask(__name__)
 
 
 def open_pic(img_str, key):
-
     filename = 'training_data/train{}.jpg'.format(key)
     key += 1
 
@@ -21,13 +23,14 @@ def open_pic(img_str, key):
     
     return({'out':'Image not Saved.'})
 
-
+ 
 
 @app.route('/endpoint_pic', methods=['POST'])
 def endpoint_pic():
+    # inputs = {'pic0':,'pic1':,...}
     inputs = request.json
     keys = inputs.keys()
-    print(len(keys))
+    print(keys)
     save_key = 0
     for k in keys:
         saved = open_pic(inputs[k], save_key)
@@ -44,6 +47,7 @@ def endpoint_info():
         json.dump(inputs, outfile)
 
     
+    ## Call the shell script for training
     os.system("""accelerate launch textual_inversion_single_aut.py \
         --pretrained_model_name_or_path="stabilityai/stable-diffusion-2" \
         --train_data_dir="dontchange" \
@@ -61,8 +65,12 @@ def endpoint_info():
         --hub_token='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'"""
     )
 
-    return({'out':'Information Retrieved.'})
-    
+    ## Empty training pictures' folder for future training
+    files = glob.glob('training_data/*')
+    for f in files:
+        os.remove(f)
+
+    return({'out':'Training Done!'})
 
 
 
