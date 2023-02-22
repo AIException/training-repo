@@ -60,7 +60,7 @@ def endpoint_info():
         --resolution=768 \
         --train_batch_size=1 \
         --gradient_accumulation_steps=1 \
-        --num_train_epochs=150\
+        --num_train_epochs=4\
         --learning_rate=5.0e-04 --scale_lr \
         --lr_scheduler="constant" \
         --lr_warmup_steps=0 \
