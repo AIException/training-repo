@@ -3,7 +3,7 @@ import os
 import base64
 from flask import Flask, request
 import glob
-
+import shutil
 
 
 
@@ -43,7 +43,14 @@ def endpoint_info():
     with open('json_data.json', 'w') as outfile:
         json.dump(inputs, outfile)
 
+    results_path = '/home/f_mattera_it/training-repo/results'
     
+    isExist = os.path.exists(results_path)
+    if not isExist:
+        # Create a new directory because it does not exist
+        os.makedirs(results_path)
+        print("The new directory is created!")
+
     ## Call the shell script for training
     os.system("""accelerate launch textual_inversion_single_aut.py \
         --pretrained_model_name_or_path="stabilityai/stable-diffusion-2" \
@@ -63,9 +70,7 @@ def endpoint_info():
     )
 
     ## Empty training pictures' folder for future training
-    files = glob.glob('/home/f_mattera_it/training-repo/results/*')
-    for f in files:
-        os.remove(f)
+    shutil.rmtree(results_path, ignore_errors=True)
 
     return({'out':'Training Done!'})
 
