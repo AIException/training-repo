@@ -43,7 +43,7 @@ def endpoint_info():
     with open('json_data.json', 'w') as outfile:
         json.dump(inputs, outfile)
 
-    results_path = '/home/f_mattera_it/training-repo/results'
+    results_path = '/home/f_mattera_it/training-repo/BACK/results'
     
     isExist = os.path.exists(results_path)
     if not isExist:
@@ -74,7 +74,7 @@ def endpoint_info():
     print('Results directory removed for future training.')
 
     ## Empty training pictures' folder for future training
-    files = glob.glob('/home/f_mattera_it/training-repo/training_data/*')
+    files = glob.glob('/home/f_mattera_it/training-repo/BACK/training_data/*')
     for f in files:
         os.remove(f)
     print('Training pictures removed for future training.')
