@@ -477,10 +477,8 @@ def main():
     input_folders = ['training_data']
     place_holders = [train_info['placeholder']]
 
-    output_folders = ['/home/f_mattera_it/training-repo/training_data/{}'.format(place_holders[0])]
-    isExist = os.path.exists(output_folders[0])
-    if not isExist:
-        os.makedirs(output_folders[0])
+    output_folders = ['/home/f_mattera_it/training-repo/results']
+    #output_folders = ['/home/f_mattera_it/training-repo/training_data/{}'.format(place_holders[0])]
     init_toks = [train_info['init_tok']]
 
 
