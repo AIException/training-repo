@@ -60,7 +60,7 @@ def endpoint_info():
         --resolution=768 \
         --train_batch_size=1 \
         --gradient_accumulation_steps=1 \
-        --max_train_steps=5\
+        --num_train_epochs=200\
         --learning_rate=5.0e-04 --scale_lr \
         --lr_scheduler="constant" \
         --lr_warmup_steps=0 \
@@ -71,10 +71,12 @@ def endpoint_info():
 
     ## Empty results folder for future training
     shutil.rmtree(results_path, ignore_errors=True)
+    print('Results directory removed for future training.')
 
     ## Empty training pictures' folder for future training
     files = glob.glob('/home/f_mattera_it/training-repo/training_data/*')
     for f in files:
         os.remove(f)
+    print('Training pictures removed for future training.')
 
     return({'out':'Training Done!'})

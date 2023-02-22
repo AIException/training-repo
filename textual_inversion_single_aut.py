@@ -478,7 +478,6 @@ def main():
     place_holders = [train_info['placeholder']]
 
     output_folders = ['/home/f_mattera_it/training-repo/results']
-    #output_folders = ['/home/f_mattera_it/training-repo/training_data/{}'.format(place_holders[0])]
     init_toks = [train_info['init_tok']]
 
 
