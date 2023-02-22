@@ -63,9 +63,9 @@ def endpoint_info():
     )
 
     ## Empty training pictures' folder for future training
-    files = glob.glob('/home/f_mattera_it/training-repo/training_data/*')
-    for f in files:
-        os.remove(f)
+    #files = glob.glob('/home/f_mattera_it/training-repo/training_data/*')
+    """for f in files:
+        os.remove(f)"""
 
     return({'out':'Training Done!'})
 
