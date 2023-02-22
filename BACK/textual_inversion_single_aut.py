@@ -477,7 +477,7 @@ def main():
     input_folders = ['training_data']
     place_holders = [train_info['placeholder']]
 
-    output_folders = ['/home/f_mattera_it/training-repo/results']
+    output_folders = ['/home/f_mattera_it/training-repo/BACK/results']
     init_toks = [train_info['init_tok']]
 
 
