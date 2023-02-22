@@ -69,15 +69,12 @@ def endpoint_info():
         --hub_token='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'"""
     )
 
-    ## Empty training pictures' folder for future training
+    ## Empty results folder for future training
     shutil.rmtree(results_path, ignore_errors=True)
 
+    ## Empty training pictures' folder for future training
+    files = glob.glob('/home/f_mattera_it/training-repo/training_data/*')
+    for f in files:
+        os.remove(f)
+
     return({'out':'Training Done!'})
-
-
-
-    
-    
-
-
-
