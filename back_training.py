@@ -1,9 +1,7 @@
-from PIL import Image
 import json
 import os
-import accelerate
 import base64
-from flask import Flask, jsonify, request
+from flask import Flask, request
 import glob
 
 
@@ -14,8 +12,7 @@ app = Flask(__name__)
 
 def open_pic(img_str, key):
     filename = 'training_data/train{}.jpg'.format(key)
-    key += 1
-
+    
     img = base64.b64decode(img_str)
     with open(filename, 'wb') as file:
         file.write(img)
@@ -56,7 +53,7 @@ def endpoint_info():
         --resolution=768 \
         --train_batch_size=1 \
         --gradient_accumulation_steps=1 \
-        --max_train_steps=2000\
+        --max_train_steps=5\
         --learning_rate=5.0e-04 --scale_lr \
         --lr_scheduler="constant" \
         --lr_warmup_steps=0 \
@@ -66,7 +63,7 @@ def endpoint_info():
     )
 
     ## Empty training pictures' folder for future training
-    files = glob.glob('training_data/*')
+    files = glob.glob('/home/f_mattera_it/training-repo/training_data/*')
     for f in files:
         os.remove(f)
 
