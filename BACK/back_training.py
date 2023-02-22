@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 
 def open_pic(img_str, key):
-    filename = 'training_data/train{}.jpg'.format(key)
+    filename = '/home/f_mattera_it/training-repo/BACK/training_data/train{}.jpg'.format(key)
     
     img = base64.b64decode(img_str)
     with open(filename, 'wb') as file:
