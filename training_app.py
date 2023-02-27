@@ -64,8 +64,10 @@ with header:
     st.write('Train your items here!')
 
     train_pics = st.file_uploader('Upload pictures of your item', accept_multiple_files = True)
-    link = st.text_input("Link to buy your item")
-    color = st.text_input("Item Color")
+    #link = st.text_input("Link to buy your item")
+    link = ""
+    #color = st.text_input("Item Color")
+    color = ""
     placeholder = st.text_input("Placeholder Token")
     init_tok = st.text_input("Initializer Token (closest word to the item)")
 
