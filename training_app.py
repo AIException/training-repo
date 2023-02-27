@@ -18,7 +18,7 @@ def encode_image(image, format = "JPEG"):
 
 
 
-def request_handler_info(payload, url = 'http://34.27.242.33:5000/endpoint_info'):
+def request_handler_info(payload, url = 'http://34.173.251.98:5000/endpoint_info'):
     # Send payload
     response = requests.post(url, json=payload)
     out = response.json()['out']
@@ -26,7 +26,7 @@ def request_handler_info(payload, url = 'http://34.27.242.33:5000/endpoint_info'
     return out
 
 
-def request_handler_pic(pics, url = 'http://34.27.242.33:5000/endpoint_pic'):
+def request_handler_pic(pics, url = 'http://34.173.251.98:5000/endpoint_pic'):
     # Send payload 
     response = requests.post(url, json=pics)
     out = response.json()
