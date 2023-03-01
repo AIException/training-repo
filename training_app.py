@@ -18,7 +18,7 @@ def encode_image(image, format = "JPEG"):
 
 
 
-def request_handler_info(payload, url = 'http://34.173.251.98:5000/endpoint_info'):
+def request_handler_info(payload, url = 'http://127.0.0.1:5000/endpoint_info'):
     # Send payload
     response = requests.post(url, json=payload)
     out = response.json()['out']
@@ -26,9 +26,16 @@ def request_handler_info(payload, url = 'http://34.173.251.98:5000/endpoint_info
     return out
 
 
-def request_handler_pic(pics, url = 'http://34.173.251.98:5000/endpoint_pic'):
+def request_handler_pic(pics, url = 'http://127.0.0.1:5000/endpoint_pic'):
     # Send payload 
     response = requests.post(url, json=pics)
+    out = response.json()
+
+    return out['out']
+
+def request_handler_train(go, url = 'http://127.0.0.1:5000/endpoint_train'):
+    # Send payload 
+    response = requests.post(url, json=go)
     out = response.json()
 
     return out['out']
@@ -63,34 +70,33 @@ with header:
     st.write('A generative AI powered tool that helps Companies place their products in Custom Environments.') 
     st.write('Train your items here!')
 
-    train_pics = st.file_uploader('Upload pictures of your item', accept_multiple_files = True)
-    #link = st.text_input("Link to buy your item")
-    link = ""
-    #color = st.text_input("Item Color")
-    color = ""
+    
     placeholder = st.text_input("Placeholder Token")
     init_tok = st.text_input("Initializer Token (closest word to the item)")
 
-    pictures = st.button("Send Pictures!")
-    if pictures:
-        for train_pic in train_pics:
-            print(type(train_pic))
-            #print(train_pic)
-            result_upload = send_train_pic(train_pics)
-            st.write(result_upload)
-        pictures = False
 
+    info = st.button("Send Info!")
+    if info:
+        st.session_state = {}
+
+        info_payload = {'placeholder':placeholder, 'init_tok':init_tok}
+        result_info = request_handler_info(info_payload)
+        st.write(result_info)
+        st.session_state['info'] = True
+
+    if 'info' in st.session_state.keys():
+
+        train_pics = st.file_uploader('Upload pictures of your item', accept_multiple_files = True)
+        pictures = st.button("Send Pictures!")
+        if pictures:
+            st.session_state['pictures'] = True
+            for train_pic in train_pics:
+                print(type(train_pic))
+                result_upload = send_train_pic(train_pics)
+                st.write(result_upload)
     
-    generate = st.button("Train!")
-    if generate:
-        #PAYLOAD {'link':, 'color':, 'placeholder':, 'init_tok':}
-        info_payload = {'link':link, 'color':color, 'placeholder':placeholder, 'init_tok':init_tok}
-        result_train = request_handler_info(info_payload)
-        st.write(result_train)
-
-    
-
-
-
-
-    
+    if 'pictures' in st.session_state.keys():
+        generate = st.button("Train!")
+        if generate:
+            result_train = request_handler_train({"":""})
+            st.write(result_train)
