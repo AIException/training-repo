@@ -26,14 +26,14 @@ def request_handler_info(payload, url = 'http://34.132.197.238:5000/endpoint_inf
     return out
 
 
-def request_handler_pic(pics, url = 'http://34.132.197.238:5000/endpoint_pic'):
+def request_handler_pic(pics, url = 'http://35.188.157.28:5000/endpoint_pic'):
     # Send payload 
     response = requests.post(url, json=pics)
     out = response.json()
 
     return out['out']
 
-def request_handler_train(go, url = 'http://34.132.197.238:5000/endpoint_train'):
+def request_handler_train(go, url = 'http://35.188.157.28:5000/endpoint_train'):
     # Send payload 
     response = requests.post(url, json=go)
     out = response.json()
